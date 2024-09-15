@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import {Line} from 'react-chartjs-2';
+import axios from 'axios';
 
 const data = {
   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], 
@@ -20,7 +21,16 @@ const data = {
       borderColor: 'rgb(192, 75, 192)',
       tension: 0.1
     }
-  ]}
+  ]
+}
+
+function fetchData() {
+  const apiUrl = process.env.REACT_APP_API_URL;
+  axios.get(`${apiUrl}/data`)
+    .then(response => console.log(response.data))
+    .catch(error => console.error('Error fetching data:', error));
+}
+
 
 function App() {
   return (
